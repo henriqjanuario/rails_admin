@@ -258,9 +258,9 @@ RSpec.describe 'RailsAdmin::Adapters::ActiveRecord', active_record: true do
 
       it 'chooses like statement in per-model basis' do
         allow(FieldTest.connection).to receive(:adapter_name).and_return('postgresql')
-        expect(build_statement(:string, 'foo', 'default')).to eq(['(field ~ ?)', '%foo%'])
+        expect(build_statement(:string, 'foo', 'default')).to eq(['(field ~ ?)', foo])
         allow(FieldTest.connection).to receive(:adapter_name).and_return('sqlite3')
-        expect(build_statement(:string, 'foo', 'default')).to eq(['(LOWER(field) REGEXP ?)', '%foo%'])
+        expect(build_statement(:string, 'foo', 'default')).to eq(['(LOWER(field) REGEXP ?)', foo])
       end
 
       it "supports '_blank' operator" do
