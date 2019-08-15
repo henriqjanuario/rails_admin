@@ -245,11 +245,11 @@ module RailsAdmin
           @value = begin
             case @operator
             when 'default', 'like'
-              "%#{@value}%"
+              @value
             when 'starts_with'
-              "#{@value}%"
+              @value
             when 'ends_with'
-              "%#{@value}"
+              @value
             else
               return
             end
