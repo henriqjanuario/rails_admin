@@ -114,14 +114,9 @@ module RailsAdmin
 
           current_page = page.presence || '1'
 
-<<<<<<< HEAD
           versions = version_class_for(ar_model).where item_type: ar_model.name
           versions = versions.where item_id: object.id if object
           versions = versions.where('event REGEXP ?', "%#{query}%") if query.present?
-=======
-          versions = object.nil? ? versions_for_model(model) : object.versions
-          versions = versions.where('event LIKE ?', "%#{query}%") if query.present?
->>>>>>> 0e92ca43fe7782a8d62ae9285a8d3de7857c9853
           versions = versions.order(sort_reverse == 'true' ? "#{sort} DESC" : sort)
           versions = all ? versions : versions.send(Kaminari.config.page_method_name, current_page).per(per_page)
           paginated_proxies = Kaminari.paginate_array([], total_count: versions.try(:total_count) || versions.count)
