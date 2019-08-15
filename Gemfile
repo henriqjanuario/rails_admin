@@ -19,7 +19,7 @@ group :development, :test do
 end
 
 group :test do
-  gem 'carrierwave', '>= 0.8'
+  gem 'carrierwave', ['>= 2.0.0.rc', '< 3']
   gem 'coveralls'
   gem 'database_cleaner', ['>= 1.2', '!= 1.4.0', '!= 1.5.0']
   gem 'dragonfly', '~> 1.0'
@@ -32,8 +32,11 @@ group :test do
   gem 'pundit'
   gem 'rack-cache', require: 'rack/cache'
   gem 'rspec-rails', '>= 2.14'
+  gem 'rspec-expectations', '!= 3.8.3'
   gem 'rubocop', '~> 0.41.2'
   gem 'simplecov', '>= 0.9', require: false
+  gem 'shrine', '~> 2.0'
+  gem 'shrine-memory'
   gem 'timecop', '>= 0.5'
 
   platforms :ruby_19 do

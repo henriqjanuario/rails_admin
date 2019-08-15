@@ -1,9 +1,25 @@
 require 'spec_helper'
 
-describe RailsAdmin::AbstractModel do
+RSpec.describe RailsAdmin::AbstractModel do
+  describe '.all' do
+    it 'returns abstract models for all models' do
+      expect(RailsAdmin::AbstractModel.all.map(&:model)).to include Player, Team
+    end
+
+    it 'does not pick up a model without table', active_record: true do
+      expect(RailsAdmin::AbstractModel.all.map(&:model)).not_to include WithoutTable
+    end
+  end
+
   describe '#to_s' do
     it 'returns model\'s name' do
       expect(RailsAdmin::AbstractModel.new(Cms::BasicPage).to_s).to eq Cms::BasicPage.to_s
+    end
+  end
+
+  describe '#to_param' do
+    it 'turns namespaces into prefixes with ~' do
+      expect(RailsAdmin::AbstractModel.new('Cms::BasicPage').to_param).to eq('cms~basic_page')
     end
   end
 
@@ -56,7 +72,7 @@ describe RailsAdmin::AbstractModel do
           let(:expected_elements_count) { 1 }
         end
       end
-    end if ::Rails.version >= '4.1'
+    end
 
     context 'on dates with :en locale' do
       before do
