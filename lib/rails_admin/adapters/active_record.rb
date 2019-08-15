@@ -243,9 +243,9 @@ module RailsAdmin
           end
 
           if ['postgresql', 'postgis'].include? ar_adapter
-            ["(#{@column} ILIKE ?)", @value]
+            ["(#{@column} ~ ?)", @value]
           else
-            ["(LOWER(#{@column}) LIKE ?)", @value]
+            ["(LOWER(#{@column}) REGEXP ?)", @value]
           end
         end
 
